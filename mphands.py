@@ -3,6 +3,9 @@ from mediapipe.framework.formats import landmark_pb2
 import cv2
 import numpy as np
 import math
+import os
+
+
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
@@ -79,9 +82,16 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
                     h = (ymax-ymin)*dmult
                     xmin, xmax = wx-(w/2), wx+(w/2)
                     ymin, ymax = wy-(h/2), wy+(h/2)
+
+                    realx = (ix-xmin)/(xmax-xmin)*1366
+                    realy = (iy-ymax)/(ymin-ymax)*768
+                    print(realx)
+                    print(realy)
+                    print("\n")
+                    com = "xdotool mousemove " + str(realx) + " " + str(realy)
+                    os.system(com)
+
                             
-
-
         cv2.imshow("Image", image)
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
