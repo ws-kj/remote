@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import math
 import os
-
+import mouse
 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -85,11 +85,9 @@ with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) a
 
                     realx = (ix-xmin)/(xmax-xmin)*1366
                     realy = (iy-ymax)/(ymin-ymax)*768
-                    print(realx)
-                    print(realy)
-                    print("\n")
-                    com = "xdotool mousemove " + str(realx) + " " + str(realy)
-                    os.system(com)
+                    mouse.move(realx, realy)
+                    #com = "xdotool mousemove " + str(realx) + " " + str(realy)
+                    #os.system(com)
 
                             
         cv2.imshow("Image", image)
